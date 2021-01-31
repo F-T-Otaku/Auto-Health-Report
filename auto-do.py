@@ -11,7 +11,8 @@ def log(s: str):
     global output
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}]\t{s}\n")
-    output = output + "[" + timestamp + "]" + s + "<br>"
+    output = output + "[" + timestamp + "]" + s + "
+    "
 
 
 def genRSAPasswd(passwd, e, m):
