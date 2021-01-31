@@ -42,4 +42,4 @@ jobs:
       with:
         key: ${{ secrets.sckey }}
         text: "体温提交情况"
-        desp: ${{ output.md }}
+        desp: output.md
