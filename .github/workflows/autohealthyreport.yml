@@ -38,8 +38,8 @@ jobs:
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }}
       
     - name: Sending message
-        uses: yakumioto/serverchan-action@v1
-        with:
-          key: ${{ secrets.sckey }}
-          text: {体温提交情况}
-          desp: {消息内容 支持 MarkDown}
+      uses: yakumioto/serverchan-action@v1
+      with:
+        key: ${{ secrets.sckey }}
+        text: 体温提交情况
+        desp: 消息内容
