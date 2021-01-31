@@ -175,7 +175,7 @@ if __name__ == '__main__':
         "Accept-Language":
         "zh-CN,zh;q=0.9",
         "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)"
     })
     res = DoSUESCasLogin(person["CASUsername"], person["CASPassword"], sess)
     if res:
