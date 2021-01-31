@@ -6,11 +6,12 @@ from bs4 import BeautifulSoup
 
 rsa_e = "010001"
 rsa_m = "008aed7e057fe8f14c73550b0e6467b023616ddc8fa91846d2613cdb7f7621e3cada4cd5d812d627af6b87727ade4e26d26208b7326815941492b2204c3167ab2d53df1e3a2c9153bdb7c8c2e968df97a5e7e01cc410f92c4c2c2fba529b3ee988ebc1fca99ff5119e036d732c368acf8beba01aa2fdafa45b21e4de4928d0d403"
-
+output = "<br>"
 
 def log(s: str):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}]\t{s}\n")
+    output = f"{output}[{timestamp}]    {s}<br>"
 
 
 def genRSAPasswd(passwd, e, m):
@@ -164,6 +165,8 @@ if __name__ == '__main__':
         "CASUsername": sys.argv[1],
         "CASPassword": sys.argv[2],
     }
+    SCKEY = sys.argv[3]
+    serverChan = f"https://sc.ftqq.com/{SCKEY}.send"
     requests.adapters.DEFAULT_RETRIES = 15
     sess = requests.Session()
     sess.keep_alive = False
@@ -186,5 +189,6 @@ if __name__ == '__main__':
     state, msg = doReport(person)
     if state:
         log("report success")
+        requests.post(serverChan, data={'text': '体温测试情况', 'desp': info})
     else:
         log("report Fail\t" + msg)
