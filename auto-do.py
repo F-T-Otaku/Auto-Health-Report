@@ -1,6 +1,7 @@
 import math, time
 import random
 import requests
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 
 rsa_e = "010001"
@@ -49,6 +50,7 @@ def DoSUESCasLogin(username, password, sess):
 def doReport(person):
     username = person["CASUsername"]
     password = person["CASPassword"]
+    request.adapters.DEFAULT_RETRIES = 40
     sess = requests.Session()
     sess.headers.update({
         "Accept":
@@ -79,17 +81,21 @@ def doReport(person):
         "X-Requested-With": "XMLHttpRequest"
     }
     sess.headers.update(newHeader)
-    if int(time.strftime("%H")) < 12:
+
+    time_utc = datetime.utcnow()
+    time_peking = (time_utc + timedelta(hours=8))
+
+    if (int(time_peking.strftime("%H")) + 8) % 24 < 12:
         timeType = "上午"
     else:
         timeType = "下午"
-    date = time.strftime("%Y-%m-%d")
-    now = time.strftime("%Y-%m-%d %H:%M")
+    now = time_peking.strftime("%Y-%m-%d %H:%M")
 
     # 在这里你可以填写过去或者未来的日期(
-    # timeType = "下午"
-    # date = "2021-01-28 15:00"
+    # timeType = "上午"
+    # now = "2021-01-31 8:11"
 
+    log("Time Peking: " + now)
     requestJsonFirst = {
         "params": {
             "empcode": username
@@ -102,7 +108,7 @@ def doReport(person):
         },
         "querySqlId": "com.sudytech.work.shgcd.jkxxcj.jkxxcj.queryNear"
     }
-    resFrist = sess.post(
+    sess.post(
         "https://workflow.sues.edu.cn/default/work/shgcd/jkxxcj/com.sudytech.portalone.base.db.queryBySqlWithoutPagecond.biz.ext",
         json=requestJsonFirst)
     resSecond = sess.post(
@@ -157,7 +163,9 @@ if __name__ == '__main__':
         "CASUsername": sys.argv[1],
         "CASPassword": sys.argv[2],
     }
+    requests.adapters.DEFAULT_RETRIES = 15
     sess = requests.Session()
+    sess.keep_alive = False
     sess.headers.update({
         "Accept":
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -179,4 +187,3 @@ if __name__ == '__main__':
         log("report success")
     else:
         log("report Fail\t" + msg)
-    
