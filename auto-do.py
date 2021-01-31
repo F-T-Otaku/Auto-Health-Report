@@ -50,7 +50,7 @@ def DoSUESCasLogin(username, password, sess):
 def doReport(person):
     username = person["CASUsername"]
     password = person["CASPassword"]
-    request.adapters.DEFAULT_RETRIES = 40
+    requests.adapters.DEFAULT_RETRIES = 40
     sess = requests.Session()
     sess.keep_alive = False
     sess.headers.update({
