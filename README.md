@@ -1,5 +1,5 @@
 # Auto-Health-Card
-Automatically complete daily reporting
+Automatically complete SUES daily health report.
 
 ## How to use
 
