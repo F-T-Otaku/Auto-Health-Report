@@ -1,36 +1,41 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: Automatic-Healthy-Report
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+    - main
   schedule:
-    - cron: '33 22 * * *'
-    - cron: '13 0 * * *'
-    - cron: '49 2 * * *'
-    - cron: '7 6 * * *'
-    - cron: '37 8 * * *'
-    - cron: '55 10 * * *'
+    - cron: 17 1 * * * 
+    - cron: 19 7 * * *
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  auto-fill-tmp:
+    runs-on: ubuntu-20.04
+    name: Fxxk_SUES
+    env:
+      TZ: Asia/Shanghai
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.9
+    - name: Checkout 
+      uses: actions/checkout@v2
+      with:
+        ref: main
+      
+    - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: '3.9'
+        architecture: 'x64'
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install requests
         pip install beautifulsoup4
         pip install lxml
+    
     - name: Run
-      run: |
-        python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }}
+      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }}
