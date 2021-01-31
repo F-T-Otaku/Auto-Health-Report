@@ -10,7 +10,7 @@ rsa_m = "008aed7e057fe8f14c73550b0e6467b023616ddc8fa91846d2613cdb7f7621e3cada4cd
 def log(s: str):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}]\t{s}\n")
-    output = output + "[" + timestamp + "]" + s + "<br>"
+    global output = output + "[" + timestamp + "]" + s + "<br>"
 
 
 def genRSAPasswd(passwd, e, m):
