@@ -1,4 +1,4 @@
-# Auto-Health-Card
+# Auto-Health-Report
 Automatically complete SUES daily health report.
 
 ## How to use
