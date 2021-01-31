@@ -35,11 +35,11 @@ jobs:
         pip install lxml
     
     - name: Run
-      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }}
+      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} >> output.md
       
     - name: Sending message
       uses: yakumioto/serverchan-action@v1
       with:
         key: ${{ secrets.sckey }}
-        text: 体温提交情况
-        desp: 消息内容
+        text: "体温提交情况"
+        desp: ${{ output.md }}
