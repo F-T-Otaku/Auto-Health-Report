@@ -1,7 +1,7 @@
 # Auto-Health-Report
 Automatically complete SUES daily health report.
 
-***CAUTION: This repo is only for learning purposes, DO NOT use this repo for real health status reports. The author(s) will not be responsible if anything bad happens.
+***CAUTION: This repo is only for learning purposes, DO NOT use this repo for real health status reports. The author(s) will not be responsible if anything bad happens.***
 
 ***First,You NEED to REGISTER A GITHUB ACCOUNT and LOG IN.***
 
