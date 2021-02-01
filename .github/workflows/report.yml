@@ -40,8 +40,6 @@ jobs:
     - name: Run And Sending message
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
     
-    - name: When the job failed
-      if: ${{ failure() && (i<5) }}
-      run: |
-        ((i++))
-        python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
+    - name: Re-run once if fail
+      if: ${{ failure() }}
+      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
