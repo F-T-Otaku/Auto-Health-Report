@@ -40,7 +40,7 @@ Automatically complete SUES daily health report.
 
 1. Contact BotFather to create an bot and get your **BOT_TOKEN**.
 2. Reply to your bot with any message, then access this link(change TOKEN to your own):
-   - `https://api.telegram.org/bot`***TOKEN***`/getUpdates`
+   - https://api.telegram.org/bot__TOKEN__/getUpdates
 3. In this pages, you'll see your **id**.(Close to *username*, *first_name*)
 4. Add two secret. 
    1. Name: **BOT_TOKEN**, Value: *Your BOT_TOKEN*.
