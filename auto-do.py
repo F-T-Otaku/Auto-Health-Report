@@ -190,6 +190,6 @@ if __name__ == '__main__':
     state, msg = doReport(person)
     if state:
         log("report success")
-        requests.post(serverChan, data={'text': '体温测试情况', 'desp': output})
+        requests.post(serverChan, data={'text': '体温填写情况', 'desp': output})
     else:
         log("report Fail\t" + msg)
