@@ -41,7 +41,7 @@ jobs:
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
     
     - name: When the job failed
-      if: ${{ failure() }} && (i<5)
+      if: ${{ failure() && (i<5) }}
       run: |
         ((i++))
         python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
