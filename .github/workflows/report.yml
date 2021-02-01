@@ -4,9 +4,9 @@
 name: Automatic-Healthy-Report
 
 on:
-#  push:
-#    branches: 
-#    - main
+  push:
+    branches: 
+    - main
   schedule:
     - cron: "18 0 * * *" 
     - cron: "40 2 * * *"
@@ -38,4 +38,4 @@ jobs:
         pip install pyTelegramBotAPI
     
     - name: Run And Sending message
-      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }} ${{ secrets.bot_token }} ${{ secrets.chat_id }}
+      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.SCKEY }} ${{ secrets.BOT_TOKEN }} ${{ secrets.CHAT_ID }}
