@@ -20,7 +20,7 @@ Automatically complete SUES daily health report.
 
 ### How to create your own cron table
 
-1. Open the xxx.yml fill.(normally is "/.github/workflows/autohealthyreport.yml")
+1. Open the xxx.yml fill. (Normally is "/.github/workflows/autohealthyreport.yml")
 2. Change this to any time you want:
 ```
   schedule:
@@ -28,7 +28,7 @@ Automatically complete SUES daily health report.
     - cron: "40 1 * * *"  
     - cron: "19 7 * * *"
 ```
-3. `- cron: "17 1 * * *" ` means it runs at 01:17 ***UTC*** every day.(UTC is eight hours later than CST)(CST – China Standard Time)
+3. `cron: "17 1 * * *" ` means it runs at 01:17 ***UTC*** every day.(UTC is eight hours later than CST)(CST – China Standard Time)
 
 ## ServerChan Usage
 
