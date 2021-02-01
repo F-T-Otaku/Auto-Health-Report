@@ -32,19 +32,19 @@ Automatically complete SUES daily health report.
 ```
 3. `cron: "17 1 * * *" ` means it runs at 01:17 ***UTC*** every day.
 
-   - *P.S. UTC is eight hours later than CST.*
-   - *P.P.S. CST – China Standard Time.*
-   - *P.P.P.S. To ensure the report is successful, pls set more than 4 times.*
+  - *P.S. UTC is eight hours later than CST.*
+  - *P.P.S. CST – China Standard Time.*
+  - *P.P.P.S. To ensure the report is successful, pls set more than 4 times.*
 
 ## TelegramBot Usage
 
 1. Contact BotFather to create an bot and get your **BOT_TOKEN**.
 2. Reply to your bot with any message, then access this link(change TOKEN to your own):
-   - https://api.telegram.org/bot**TOKEN**/getUpdates
+  - `https://api.telegram.org/bot`***TOKEN***`/getUpdates`
 3. In this pages, you'll see your **id**.(Close to *username*, *first_name*)
 4. Add two secret. 
-   - Name: **BOT_TOKEN**, Value: *Your BOT_TOKEN*.
-   - Name: **CHAT_ID**, Value: *Your id*.
+  - Name: **BOT_TOKEN**, Value: *Your BOT_TOKEN*.
+  - Name: **CHAT_ID**, Value: *Your id*.
 5. Enjoy~
 
 ## ServerChan Usage
