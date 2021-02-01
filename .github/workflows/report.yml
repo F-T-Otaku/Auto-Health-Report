@@ -35,11 +35,8 @@ jobs:
         pip install requests
         pip install beautifulsoup4
         pip install lxml
-        i=1
+        pip install pyTelegramBotAPI
     
     - name: Run And Sending message
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
-    
-    - name: Re-run once if fail
-      if: ${{ failure() }}
-      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
+
