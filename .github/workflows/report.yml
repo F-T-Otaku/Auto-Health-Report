@@ -38,5 +38,4 @@ jobs:
         pip install pyTelegramBotAPI
     
     - name: Run And Sending message
-      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
-
+      run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }} ${{ secrets.bot_token }} ${{ secrets.chat_id }}
