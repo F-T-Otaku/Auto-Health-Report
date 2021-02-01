@@ -35,6 +35,13 @@ jobs:
         pip install requests
         pip install beautifulsoup4
         pip install lxml
+        i=1
     
     - name: Run And Sending message
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
+    
+    - name: When the job failed
+      if: ${{ failure() }} && (i<5)
+      run: |
+        ((i++))
+        python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.sckey }}
