@@ -14,8 +14,8 @@ Automatically complete SUES daily health report.
 
 ## Attention
 
-1. Pls edit your own cron table in autohealthyreport.yml.
-2. Action's cron table runs in UTC.
+1. Pls edit your own cron table in report.yml.
+2. Action's cron table runs in ***UTC***.
 3. **You need post manually at least 1 time.**
 
 ### How to create your own cron table
@@ -39,7 +39,11 @@ Automatically complete SUES daily health report.
 2. Add a secret. Name: sckey, Value: Your SCKEY.
 3. Enjoy~
 
+
 ## To Do List
 
 - [ ] Telegram bot support
 - [x] ServerChan support
+
+## Thanks
+Thanks to [zsqw123](https://github.com/zsqw123/Automatic-Health-Card) and [JLUZHAnalytica](https://github.com/JLUZHAnalytica/Automatic-Health-Card).
