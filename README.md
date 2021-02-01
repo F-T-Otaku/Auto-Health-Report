@@ -29,8 +29,9 @@ Automatically complete SUES daily health report.
     - cron: "19 7 * * *"
 ```
 3. `cron: "17 1 * * *" ` means it runs at 01:17 ***UTC*** every day.
-   - *P.S. UTC is eight hours later than CST.*
-   - *P.P.S. CST – China Standard Time*
+
+   * *P.S. UTC is eight hours later than CST.*
+   * *P.P.S. CST – China Standard Time*
 
 ## ServerChan Usage
 
