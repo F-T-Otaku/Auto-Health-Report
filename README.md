@@ -84,5 +84,10 @@ python local-report.py [account] [password]
 - [x] Fix bug
 - [ ] Auto Rerun(When failed)
 
-## Special Thanks
+## Thanks
+
 Thanks to [zsqw123](https://github.com/zsqw123/Automatic-Health-Card) and [JLUZHAnalytica](https://github.com/JLUZHAnalytica/Automatic-Health-Card)(Original Author).
+
+### Special thanks
+
+[**Hyneman**](https://github.com/HynemanKan)
