@@ -34,7 +34,7 @@ pip install lxml
 4. Run this:
 
 ```powershell
-python actions.py [account] [password]
+python local-report.py [account] [password]
 ```
 
 ## Attention
