@@ -162,7 +162,7 @@ def doReport(person):
 if __name__ == '__main__':
     import sys
     import telebot
-    output = "\n"
+    output = "体温上报成功" + "\n\n"
     person = {
         "CASUsername": sys.argv[1],
         "CASPassword": sys.argv[2],
