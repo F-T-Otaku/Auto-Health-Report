@@ -5,6 +5,8 @@ Automatically complete SUES daily health report.
 
 ***First,You NEED to REGISTER A GITHUB ACCOUNT and LOG IN.***
 
+**You need to report manually on the** ***WECHAT FOR COMPANY*** **at least once before using this tool.**
+
 ## How to use
 
 1. Fork my repo. (Give me a star if you like this. lol)
@@ -18,7 +20,6 @@ Automatically complete SUES daily health report.
 
 1. Pls edit your own cron table in report.yml.
 2. Action's cron table runs in ***UTC***.
-3. **You need to report manually on the website at least once before using this tool.**
 
 ### How to create your own cron table
 
@@ -58,6 +59,7 @@ Automatically complete SUES daily health report.
 
 - [x] Telegram bot support
 - [x] ServerChan support
+- [x] Fail feedback
 - [ ] Auto Rerun(When failed)
 
 ## Special Thanks
