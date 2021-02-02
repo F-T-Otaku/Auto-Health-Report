@@ -1,6 +1,7 @@
 import sys
 import time
 import telebot
+import requests
 
 output = "体温上报失败" + "\n\n"
 SCKEY = sys.argv[1]
