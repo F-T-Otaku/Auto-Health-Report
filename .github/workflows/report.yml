@@ -4,14 +4,12 @@
 name: Automatic-Healthy-Report
 
 on:
-#  push:
-#    branches: 
-#    - main
+  push:
+    branches: 
+    - main
   schedule:
-    - cron: "18 0 * * *" 
-#    - cron: "40 2 * * *"
-#    - cron: "23 5 * * *"  
-#    - cron: "11 7 * * *"
+    - cron: "18 23 * * *" 
+    - cron: "26 5 * * *"  
 
 jobs:
   build:
