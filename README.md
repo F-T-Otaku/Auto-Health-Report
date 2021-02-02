@@ -9,7 +9,7 @@ Automatically complete SUES daily health report.
 
 ## How to use
 
-~~1. Fork my repo. (Give me a star if you like this. lol)~~
+   ~~1. Fork my repo. (Give me a star if you like this. lol)~~
 1. Use my repo template and use your own repo.
 2. Open your own repo and choose "Settings".
 3. In the left sidebar, click Secrets.
