@@ -87,7 +87,7 @@ def doReport(person):
     time_utc = datetime.utcnow()
     time_peking = (time_utc + timedelta(hours=8))
 
-    if (int(time_peking.strftime("%H")) + 8) % 24 < 12:
+    if time_peking.hour % 24 < 12:
         timeType = "上午"
     else:
         timeType = "下午"
