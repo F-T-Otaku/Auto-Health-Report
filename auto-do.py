@@ -162,7 +162,7 @@ def doReport(person):
 if __name__ == '__main__':
     import sys
     import telebot
-    output = "<br>"
+    output = "\n"
     person = {
         "CASUsername": sys.argv[1],
         "CASPassword": sys.argv[2],
@@ -170,7 +170,7 @@ if __name__ == '__main__':
     SCKEY = sys.argv[3]
     TOKEN = sys.argv[4]
     CHAT_ID = sys.argv[5]
-    serverChan = f"https://sc.ftqq.com/{SCKEY}.send"
+    ServerChan = f"https://sc.ftqq.com/{SCKEY}.send"
     bot = telebot.TeleBot(TOKEN)
     requests.adapters.DEFAULT_RETRIES = 15
     sess = requests.Session()
@@ -194,7 +194,7 @@ if __name__ == '__main__':
     state, msg = doReport(person)
     if state:
         log("report success")
-        requests.post(serverChan, data={'text': '体温填写情况', 'desp': output})
+        requests.post(ServerChan, data={'text': '体温填写情况', 'desp': output})
         bot.send_message(CHAT_ID, output)
     else:
         log("report Fail\t" + msg)
