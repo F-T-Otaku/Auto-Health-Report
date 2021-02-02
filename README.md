@@ -5,7 +5,7 @@ Automatically complete SUES daily health report.
 
 ***First,You NEED to REGISTER A GITHUB ACCOUNT and LOG IN.***
 
-**You need to report manually on the** ***WECHAT FOR COMPANY*** **at least once before using this tool.**
+**You need to report manually on the** ***WECHAT WORK*** **at least once before using this tool.**
 
 ## How to use
 
