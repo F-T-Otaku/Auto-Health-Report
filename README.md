@@ -10,7 +10,7 @@ Automatically complete SUES daily health report.
 ## How to use
 
 - ~~Fork my repo. (Give me a star if you like this. lol)~~
-1. Use my repo template and use your own repo.
+1. Use my repo template and create your own repo.
 2. Open your own repo and choose "Settings".
 3. In the left sidebar, click Secrets.
 4. Click New repository secret.
