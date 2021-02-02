@@ -91,7 +91,7 @@ def doReport(person):
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
         "Content-Type": "text/json",
         "Origin": "https://workflow.sues.edu.cn",
-        "Referer":"https://workflow.sues.edu.cn/default/work/shgcd/jkxxcj/jkxxcj.jsp",
+        "Referer": "https://workflow.sues.edu.cn/default/work/shgcd/jkxxcj/jkxxcj.jsp",
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-origin",
@@ -113,7 +113,7 @@ def doReport(person):
     # now = "2021-02-02 17:51"
 
     log("Time Peking: " + now + " " + timeType)
-    
+
     # 1
     requestJsonFirst = {
         "params": {
@@ -134,8 +134,8 @@ def doReport(person):
     }
     resLast = sess.post(
         "https://workflow.sues.edu.cn/default/work/shgcd/jkxxcj/com.sudytech.portalone.base.db.queryBySqlWithoutPagecond.biz.ext",
-        json=requestJsonSecond)
-    
+        json=requestLastJson)
+
     if len(resLast.json()["list"]) == 0:
         return False, "GET LAST REPORT FAIL"
     person = resLast.json()["list"][0]
