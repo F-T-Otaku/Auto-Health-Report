@@ -7,7 +7,9 @@ Automatically complete SUES daily health report.
 
 **You need to report manually on the** ***WECHAT WORK*** **at least once before using this tool.**
 
-## How to use
+## How to use - Two ways
+
+### Use Action
 
 - ~~Fork my repo. (Give me a star if you like this. lol)~~
 1. Use my repo template and create your own repo.
@@ -16,6 +18,24 @@ Automatically complete SUES daily health report.
 4. Click New repository secret.
 5. Type "NUM" and "PWD" for your secret in the Name input box and enter the Value for your secret.
 6. Commit anything or wait actions auto run.
+
+### Local
+
+#### In this mode, you can fix your past missing report.
+
+1. Download *local-report.py*.
+2. Prepare local environment: **Python 3.6+**.
+3. Install dependencies:
+```powershell
+pip install requests
+pip install beautifulsoup4
+pip install lxml
+```
+4. Run this:
+
+```powershell
+python actions.py [account] [password]
+```
 
 ## Attention
 
@@ -52,7 +72,7 @@ Automatically complete SUES daily health report.
 ## ServerChan Usage
 
 1. Open [ServerChan](http://sc.ftqq.com/) and follow the instructions to get your own SCKEY.
-2. Add a secret. Name: **SCKRY**, Value: *Your SCKEY*.
+2. Add a secret. Name: **SCKEY**, Value: *Your SCKEY*.
 3. Enjoy~
 
 
@@ -61,6 +81,7 @@ Automatically complete SUES daily health report.
 - [x] Telegram bot support
 - [x] ServerChan support
 - [x] Fail feedback
+- [x] Fix bug
 - [ ] Auto Rerun(When failed)
 
 ## Special Thanks
