@@ -37,5 +37,9 @@ jobs:
         pip install lxml
         pip install pyTelegramBotAPI
     
-    - name: Run And Sending message
+    - name: Run and send message
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.SCKEY }} ${{ secrets.BOT_TOKEN }} ${{ secrets.CHAT_ID }}
+     
+    - name: ${{ failure() }}
+      if: ${{ failure() }}
+      run: python fail-feedback.py ${{ secrets.SCKEY }} ${{ secrets.BOT_TOKEN }} ${{ secrets.CHAT_ID }}
