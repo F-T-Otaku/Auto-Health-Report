@@ -77,7 +77,7 @@ def doReport(person):
         "Accept-Language":
             "zh-CN,zh;q=0.9",
         "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+            "Mozilla/5.0 (Linux; Android 10; H8324 Build/52.1.A.3.49; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045513 Mobile Safari/537.36 MMWEBID/7014 MicroMessenger/8.0.1840(0x2800003D) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64"
     })
     res = DoSUESCasLogin(username, password, sess)
     if not res:
@@ -102,16 +102,15 @@ def doReport(person):
     time_now = datetime.utcnow()
     time_start = datetime(2021, 1, 29, 0, 1)
 
-    # 在这里你可以填写过去或者未来的日期(
-    # timeType = "上午"
-    # now = "2021-02-02 10:00"
+    # 在这里你可以填写你想开始自动填写的时间，默认是从2021年1月29日上午开始填
+    # time_start = datatime(2021, 1, 29, 0, 1)
 
     while True:
         diff = time_start - time_now
         if (diff.days * 86400 + diff.seconds) > 0:
             break
         time_start += timedelta(hours=12)
-        up_time = time_start + timedelta(minutes=int(random.uniform(1, 30)))
+        up_time = time_start + timedelta(hours=int(random.uniform(0, 10))) + timedelta(minutes=int(random.uniform(1, 30)))
         if up_time.hour < 12:
             timeType = "上午"
         else:
@@ -154,7 +153,7 @@ def doReport(person):
                 "jtgj": person["jtgj"],
                 "jkzk": person["jkzk"],
                 "jkqk": person["jkqk"],
-                "tw": str(round(random.uniform(36.3, 36.7), 1)),
+                "tw": str(round(random.uniform(36.1, 36.9), 1)),
                 "sd": timeType,
                 "bz": person["bz"],
                 "_ext": "{}"
@@ -188,7 +187,7 @@ if __name__ == '__main__':
         "Accept-Language":
             "zh-CN,zh;q=0.9",
         "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+            "Mozilla/5.0 (Linux; Android 10; H8324 Build/52.1.A.3.49; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045513 Mobile Safari/537.36 MMWEBID/7014 MicroMessenger/8.0.1840(0x2800003D) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64"
     })
     res = DoSUESCasLogin(person["CASUsername"], person["CASPassword"], sess)
     if res:
