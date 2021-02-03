@@ -1,6 +1,7 @@
 import math, time
 import random
 import requests
+
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 
@@ -78,7 +79,7 @@ def doReport(person):
         "Accept-Language":
             "zh-CN,zh;q=0.9",
         "User-Agent":
-            "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)"
+            "Mozilla/5.0 (Linux; Android 10; H8324 Build/52.1.A.3.49; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045513 Mobile Safari/537.36 MMWEBID/7014 MicroMessenger/8.0.1840(0x2800003D) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64"
     })
     res = DoSUESCasLogin(username, password, sess)
     if not res:
@@ -108,7 +109,9 @@ def doReport(person):
         timeType = "下午"
     now = time_peking.strftime("%Y-%m-%d %H:%M")
 
-    # 在这里你可以填写过去或者未来的日期(
+    # 代码默认执行现在时间
+    # 在这里你可以填写过去或者未来的日期(不推荐
+    # 将"if time_peking.hour...now = time_peking..."这五行代码全部删除，然后按照下面的格式填写的你想要的时间：
     # timeType = "下午"
     # now = "2021-02-02 17:51"
 
@@ -202,7 +205,7 @@ if __name__ == '__main__':
         "Accept-Language":
             "zh-CN,zh;q=0.9",
         "User-Agent":
-            "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)"
+            "Mozilla/5.0 (Linux; Android 10; H8324 Build/52.1.A.3.49; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045513 Mobile Safari/537.36 MMWEBID/7014 MicroMessenger/8.0.1840(0x2800003D) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64"
     })
     res = DoSUESCasLogin(person["CASUsername"], person["CASPassword"], sess)
     if res:
