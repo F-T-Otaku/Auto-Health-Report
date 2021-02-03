@@ -4,9 +4,9 @@
 name: Automatic-Healthy-Report
 
 on:
-  push:
-    branches: 
-    - main
+#  push:
+#    branches: 
+#    - main
   schedule:
     - cron: "18 23 * * *" 
     - cron: "26 5 * * *"  
