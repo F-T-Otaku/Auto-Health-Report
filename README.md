@@ -3,7 +3,11 @@ Automatically complete SUES daily health report.
 
 ***CAUTION: This repo is only for learning purposes, DO NOT use this repo for real health status reports. The author(s) will not be responsible if anything bad happens.***
 
-***In the master vision, serverchan and telegram bot is required options.If you don't need both of these, you can build your own vision by change report.yml and auto-do.py.If you don't know how to do it, please use the main branch vision***
+***In the master vision, serverchan and telegram bot is required options.***
+
+***If you don't need both of these, you can build your own vision by change report.yml and auto-do.py.***
+
+***If you don't know how to build your own vision, please use the main branch vision***
 
 ## Attention
 
@@ -23,18 +27,17 @@ Automatically complete SUES daily health report.
 
    1. *P.S. UTC is eight hours later than CST.*
    2. *P.P.S. CST – China Standard Time.*
-   ~~3. *P.P.P.S. To ensure the report is successful, please set more than 4 times.*~~
-   3. *Because this version has fail feedback, you can manually rerun the workflow, it's no need to run the job more than twice a day.*
+   3. ~~*P.P.P.S. To ensure the report is successful, please set more than 4 times.*~~
+   4. *Because this version has fail feedback, you can manually rerun the workflow, it's no need to run the job more than twice a day.*
 
 ## How to use - Two normal report ways and one fix missing way
 
 ### Use Github Actions (Recommend)
 
-#### In this mode, you can receive message through ServerChan(on WeChat) and telegram bot
+**In this mode, you can receive message through ServerChan(on WeChat) and telegram bot.**
 
-#### And it will automatically report twice a day 
+**And it will automatically report twice a day.** 
 
-- ~~Fork my repo. (Give me a star if you like this. lol)~~
 1. Use my repo template and create your own repo.
 2. Open your own repo and choose `Settings`.
 3. In the left sidebar, click `Secrets`.
@@ -47,7 +50,7 @@ Automatically complete SUES daily health report.
 
 1. Contact BotFather to create a bot and get your **BOT_TOKEN**.
 2. Reply to your bot with any message, then access this link(change TOKEN to your own):
-   - `https://api.telegram.org/botTOKEN/getUpdates`
+   `https://api.telegram.org/botTOKEN/getUpdates`
 3. In this pages, you'll see your **id**.(Close to *username*, *first_name*)
 4. Add two secrets. 
    1. Name: **BOT_TOKEN**, Value: *Your BOT_TOKEN*.
@@ -59,7 +62,7 @@ Automatically complete SUES daily health report.
 1. Open [ServerChan](http://sc.ftqq.com/) and follow the instructions to get your own SCKEY.
 2. Add a secret. Name: **SCKEY**, Value: *Your SCKEY*.
 3. Enjoy~
-
+---
 ### Run locally
 
 1. Download *local.py*.
@@ -99,7 +102,7 @@ if time_peking.hour % 24 < 12:
     timeType = "下午"
     now = "2021-02-02 17:51"
 ```
-
+---
 ### Fix missing(Multiple)
 
 1. In this mode, you can fix your past missing report(s).
