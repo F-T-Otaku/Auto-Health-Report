@@ -116,6 +116,7 @@ if time_peking.hour % 24 < 12:
 
 ## To Do List
 
+- [x] Add Webvpn support
 - [x] Telegram bot support
 - [x] ServerChan support
 - [x] Fail feedback
