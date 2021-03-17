@@ -1,5 +1,12 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+#
+# Copyright (c) 2021 F-T-Otaku
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/F-T-Otaku/Auto-Health-Report
+# Description: Do health Report for SUES students.
+#
 
 name: Health-Report-Master 
 
@@ -37,7 +44,3 @@ jobs:
     
     - name: Run and send message
       run: python auto-do.py ${{ secrets.NUM }} ${{ secrets.PWD }} ${{ secrets.SCKEY }} ${{ secrets.BOT_TOKEN }} ${{ secrets.CHAT_ID }}
-     
-    - name: Fail feedback
-      if: ${{ failure() }}
-      run: python fail-feedback.py ${{ secrets.SCKEY }} ${{ secrets.BOT_TOKEN }} ${{ secrets.CHAT_ID }}
