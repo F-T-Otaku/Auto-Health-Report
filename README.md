@@ -1,5 +1,9 @@
 # Auto-Health-Report
 
+[![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/F-T-Otaku/Auto-Health-Report/blob/main/LICENSE)
+![GitHub Stars](https://img.shields.io/github/stars/F-T-Otaku/Auto-Health-Report.svg?style=flat-square&label=Stars&logo=github)
+![GitHub Forks](https://img.shields.io/github/forks/F-T-Otaku/Auto-Health-Report.svg?style=flat-square&label=Forks&logo=github)
+
 ***CAUTION: This repo is only for learning purposes, DO NOT use this repo for real health status reports. The author(s) will not be responsible if anything bad happens.***
 
 ***First, you NEED to REGISTER A GITHUB ACCOUNT and LOG IN.***
