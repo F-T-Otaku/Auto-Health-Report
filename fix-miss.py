@@ -9,24 +9,11 @@ import sys
 rsa_e = "010001"
 rsa_m = "008aed7e057fe8f14c73550b0e6467b023616ddc8fa91846d2613cdb7f7621e3cada4cd5d812d627af6b87727ade4e26d26208b7326815941492b2204c3167ab2d53df1e3a2c9153bdb7c8c2e968df97a5e7e01cc410f92c4c2c2fba529b3ee988ebc1fca99ff5119e036d732c368acf8beba01aa2fdafa45b21e4de4928d0d403"
 
+e = {}
+
 def log(s: str):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}]\t{s}")
-
-def lower_json(json_info):
-    if isinstance(json_info, dict):
-        for key in list(json_info.keys()):
-            if key.islower():
-                lower_json(json_info[key])
-            else:
-                key_lower = key.lower()
-                json_info[key_lower] = json_info[key]
-                del json_info[key]
-                lower_json(json_info[key_lower])
-
-    elif isinstance(json_info, list):
-        for item in json_info:
-            lower_json(item)
 
 def genRSAPasswd(passwd, e, m):
     # 别问我为啥rsa加密要这么写，傻逼cas
@@ -39,7 +26,6 @@ def genRSAPasswd(passwd, e, m):
     keylength = math.ceil(m.bit_length() / 8)
     crypted_data = crypted_nr.to_bytes(keylength, byteorder='big')
     return crypted_data.hex()
-
 
 def loginByWebVPN(username, password):
     sess = requests.Session()
@@ -77,13 +63,78 @@ def loginByWebVPN(username, password):
     res = sess.get(targetUrl)
     return True, "success", res.url, sess
 
+def lower_json(json_info):
+    if isinstance(json_info, dict):
+        for key in list(json_info.keys()):
+            if key.islower():
+                lower_json(json_info[key])
+            else:
+                key_lower = key.lower()
+                json_info[key_lower] = json_info[key]
+                del json_info[key]
+                lower_json(json_info[key_lower])
+
+    elif isinstance(json_info, list):
+        for item in json_info:
+            lower_json(item)
+
+def queryToday(username, ampm, tjsj, url, referer, sess):
+    try:
+        queryTodayJson = {
+            "params": {
+                "empcode": username,
+                'sd': ampm,
+                'tjsj': tjsj,
+            },
+            "querySqlId": "com.sudytech.work.shgcd.jkxxcj.jkxxcj.queryToday"
+        }
+        sess.headers.update({
+            "referer": referer
+        })
+        res = sess.post(url, json=queryTodayJson)
+        today_list = res.json()["list"]
+        if len(today_list) == 0:
+            return False
+        else:
+            global e
+            e = today_list[0]
+            lower_json(e)
+            return True
+    except:
+        return False
+
+def queryNear(username, url, referer, sess):
+    try:
+        queryNearJson = {
+            "params": {
+                "empcode": username
+            },
+            "querySqlId": "com.sudytech.work.shgcd.jkxxcj.jkxxcj.queryNear"
+        }
+        sess.headers.update({
+            "referer": referer
+        })
+        res = sess.post(url, json=queryNearJson)
+        near_list = res.json()["list"]
+        if len(near_list) == 0:
+            return False
+        else:
+            global e
+            e = near_list[0]
+            lower_json(e)
+            e.pop('id')
+            return True
+    except:
+        return False
+
+
 def doReport(person):
     username = person["name"]
     password = person["pwd"]
     requests.adapters.DEFAULT_RETRIES = 40
-    state,msg,reportUrl,sess = loginByWebVPN(username,password)
+    state, msg, reportUrl, sess = loginByWebVPN(username, password)
     if not state:
-        return False,msg
+        return False, msg
     sess.get(reportUrl)
     urlheader = "/".join(reportUrl.split("/")[:-1])
 
@@ -105,61 +156,25 @@ def doReport(person):
         else:
             timeType = "下午"
         now = up_time.strftime("%Y-%m-%d %H:%M")
+	tjsj = up_time.strftime("%Y-%m-%d")
         log("Time Peking: " + now + " " + timeType)
-        # 获取上一次的数据
-    	requestJsonFirst = {
-	    "params": {
-            	"empcode": username
-            },
-            "querySqlId": "com.sudytech.work.shgcd.jkxxcj.jkxxcj.queryNear"
-    	}
-    	sess.headers.update({
-            "referer": reportUrl
-    	})
-    	resNear = sess.post(urlheader+"/com.sudytech.portalone.base.db.queryBySqlWithoutPagecond.biz.ext",
-        	json=requestJsonFirst)
-    	resNear.url,resNear.content.decode()
-    	if len(resNear.json()["list"])==0:
-            return False,"GET LAST REPORT FAIL"
-    	person = resNear.json()["list"][0]
-    	lower_json(person)
+	url = urlheader+"/com.sudytech.portalone.base.db.queryBySqlWithoutPagecond.biz.ext"
     	# 上报
+	global e
+	e["tw"] = str(round(random.uniform(36.0, 36.9), 1))
     	updateData = {
-            "params": {
-                "sqrid": person["sqrid"],
-                "sqbmid": person["sqbmid"],
-                "rysf": person["rysf"],
-                "sqrmc": person["sqrmc"],
-                "gh": person["gh"],
-                "sfzh": person["sfzh"],
-                "sqbmmc": person["sqbmmc"],
-                "xb": person["xb"],
-                "lxdh": person["lxdh"],
-                "nl": person["nl"],
-                "tjsj": now,
-                "xrywz": person["xrywz"],
-                "sheng": person["sheng"],
-                "shi": person["shi"],
-                "qu": person["qu"],
-                "jtdzinput": person["jtdzinput"],
-                "gj": person["gj"],
-                "jtgj": person["jtgj"],
-                "jkzk": person["jkzk"],
-                "jkqk": person["jkqk"],
-                "tw": str(round(random.uniform(36.1, 36.9), 1)),
-                "sd": timeType,
-                "bz": person["bz"],
-                "_ext": "{}"
-            }
+            "params": e
     	}
     	log(updateData["params"]["gh"] + "\t" + "gentemp:" + updateData["params"]["tw"])
     	url = urlheader+"/com.sudytech.work.shgcd.jkxxcj.jkxxcj.saveOrUpdate.biz.ext"
-    	finalRes = sess.post(url,json=updateData)
-    	if finalRes.json()['result']["success"]:
-            log("Report SUCCESS")
-            return True, None
+    	finalRes = sess.post(url, json=updateData)
+ 		json = finalRes.json()
+		if 'exception' in json:
+        	return False, "Already reported or sever down"
+    	elif json['result']["success"]:
+        	return True, None
     	else:
-            return False, "[" + finalRes.json()['result']['errorcode'] + "]" + finalRes.json()['result']['msg']
+        	return False, "[" + finalRes.json()['result']['errorcode'] + "]" + finalRes.json()['result']['msg']
 
 
 if __name__ == '__main__':
@@ -169,11 +184,21 @@ if __name__ == '__main__':
     }
     requests.adapters.DEFAULT_RETRIES = 15
     
-    state, msg, url, sess = loginByWebVPN(person["name"], person["pwd"])
-    if state:
-        log("CAS login test SUCCESS")
-    else:
-        log("CAS login test FAIL")
-    if not doReport(person):
-        log("Report FAIL\t" + msg)
+   try:
+        state, msg, url, sess = loginByWebVPN(
+            person["name"], person["pwd"])
+        if state:
+            log("CAS login test SUCCESS")
+        else:
+            log("CAS login test FAIL")
+            quit()
+        state, msg = doReport(person)
+        if state:
+            log("report success")
+        else:
+            log("report Fail\t" + msg)
 
+    except:
+        failFlag = True
+        log("执行又双叒叕有问题啦~")
+        log(person["name"] + " FAILED")
