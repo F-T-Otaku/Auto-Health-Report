@@ -177,6 +177,7 @@ def doReport(person):
         return False, "[" + finalRes.json()['result']['errorcode'] + "]" + finalRes.json()['result']['msg']
 
 if __name__ == '__main__':
+    output = "qtmd形式主义" + "\n\n"
     person = {
         "name": sys.argv[1],
         "pwd": sys.argv[2],
