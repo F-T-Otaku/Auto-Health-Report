@@ -1,6 +1,7 @@
 import math, time
 import random
 import requests
+import re
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 
@@ -37,14 +38,17 @@ def loginByWebVPN(username, password):
         "Accept-Encoding": "gzip, deflate",
         "Accept-Language": "zh-CN,zh;q=0.9",
         "User-Agent": "Mozilla/5.0 (Linux; Android 10; H8324 Build/52.1.A.3.49; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045513 Mobile Safari/537.36 MMWEBID/7014 MicroMessenger/8.0.1840(0x2800003D) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
-        "origin": "https://webvpn.sues.edu.cn"
+        "origin": "https://web-vpn.sues.edu.cn"
     })
-    res = sess.get("https://webvpn.sues.edu.cn/")
+    res = sess.get("https://web-vpn.sues.edu.cn/", verify=False)
+    history = res.history
+    realUrl = "https://web-vpn.sues.edu.cn" + \
+        history[len(history)-1].headers["location"]
+    
     soup = BeautifulSoup(res.content, "lxml")
-    casUrlByWebVPN = soup.find("a")["href"]
-    res = sess.get(casUrlByWebVPN)
-    soup = BeautifulSoup(res.content, "lxml")
+    res = sess.get(realUrl, verify=False)
     execution = soup.find("input", {"name": "execution"}).attrs["value"]
+    postTarget = "https://web-vpn.sues.edu.cn"+soup.find("form")["action"]
     data = {
         "username": username,
         "password": genRSAPasswd(password, rsa_e, rsa_m),
@@ -54,17 +58,17 @@ def loginByWebVPN(username, password):
         "loginType": "1",
         "submit": "登 录"
     }
-    postTarget = soup.find("form")["action"]
-    res = sess.post(postTarget, data)
+    
+    res = sess.post(postTarget, data, verify=False)
     soup = BeautifulSoup(res.content, "lxml")
     if "健康信息填报" not in soup.text:
         return False, "loginFail", None, None
-    targetUrl = "https://webvpn.sues.edu.cn" + \
-        soup.find("a", {"title": "健康信息填报"})["href"]
-    sess.get(targetUrl)
+    realUrl = re.findall('(.*)/cas/login', realUrl)[0]
+    targetUrl = realUrl + soup.find("div", {"title": "健康信息填报"})[
+        "data-url"].replace("https://workflow.sues.edu.cn", "")
+
     time.sleep(5)
-    res = sess.get(targetUrl)
-    return True, "success", res.url, sess
+    return True, "success", targetUrl, sess
 
 def lower_json(json_info):
     if isinstance(json_info, dict):
@@ -94,7 +98,7 @@ def queryToday(username, ampm, tjsj, url, referer, sess):
         sess.headers.update({
             "referer": referer
         })
-        res = sess.post(url, json=queryTodayJson)
+        res = sess.post(url, json=queryTodayJson, verify=False)
         today_list = res.json()["list"]
         if len(today_list) == 0:
             return False
@@ -117,7 +121,7 @@ def queryNear(username, url, referer, sess):
         sess.headers.update({
             "referer": referer
         })
-        res = sess.post(url, json=queryNearJson)
+        res = sess.post(url, json=queryNearJson, verify=False)
         near_list = res.json()["list"]
         if len(near_list) == 0:
             return False
@@ -137,8 +141,9 @@ def doReport(person):
     state, msg, reportUrl, sess = loginByWebVPN(username, password)
     if not state:
         return False, msg
-    sess.get(reportUrl)
-    urlheader = "/".join(reportUrl.split("/")[:-1])
+    reportUrl = "https://web-vpn.sues.edu.cn/https/77726476706e69737468656265737421e7f85397213c6747301b9ca98b1b26312700d3d1/default/work/shgcd/jkxxcj/jkxxcj.jsp"
+    urlheader = "https://web-vpn.sues.edu.cn/https/77726476706e69737468656265737421e7f85397213c6747301b9ca98b1b26312700d3d1/default/work/shgcd/jkxxcj"
+    sess.get(reportUrl, verify=False)
 
     time_utc = datetime.utcnow()
     time_peking = (time_utc + timedelta(hours=8))
@@ -155,7 +160,7 @@ def doReport(person):
     # Today
     if not queryToday(username, timeType, tjsj, url, reportUrl, sess):
         if not queryNear(username, url, reportUrl, sess):
-            log("无最近数据")
+            log(username+":无最近数据")
             return False
 
     # 上报
@@ -167,7 +172,7 @@ def doReport(person):
     log(updateData["params"]["gh"] + "\t" +
         "gentemp:" + updateData["params"]["tw"])
     url = urlheader+"/com.sudytech.work.shgcd.jkxxcj.jkxxcj.saveOrUpdate.biz.ext"
-    finalRes = sess.post(url, json=updateData)
+    finalRes = sess.post(url, json=updateData, verify=False)
     json = finalRes.json()
     if 'exception' in json:
         return False, "Already reported or sever down"
@@ -187,6 +192,7 @@ if __name__ == '__main__':
     CHAT_ID = sys.argv[5]
     ServerChan = f"https://sc.ftqq.com/{SCKEY}.send"
     bot = telebot.TeleBot(TOKEN)
+    requests.packages.urllib3.disable_warnings()
     requests.adapters.DEFAULT_RETRIES = 15
 
     try:
