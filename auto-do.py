@@ -60,7 +60,7 @@ def loginByWebVPN(username, password):
     soup = BeautifulSoup(res.content, "lxml")
     if "健康信息填报" not in soup.text:
         return False, "loginFail", None, None
-     realUrl = re.findall('(.*)/cas/login', realUrl)[0]
+    realUrl = re.findall('(.*)/cas/login', realUrl)[0]
     targetUrl = realUrl + soup.find("div", {"title": "健康信息填报"})[
         "data-url"].replace("https://workflow.sues.edu.cn", "")
 
